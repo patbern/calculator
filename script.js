@@ -49,11 +49,6 @@ function operate ()
     current_number.innerHTML = '';
 }
 
-const add_number = (number) => 
-{
-    current_operation = current_operation.toString() + number.toString()
-}
-
 function show_results () 
 {
     if(previous_number.innerHTML === '' || current_number.innerHTML === '') return;
@@ -100,7 +95,8 @@ function show_results ()
     math_sign.innerHTML = '';
 }
 
-function update_result () {
+function update_result () 
+{
     current_result.innerHTML = current_operation
     if(operation != null) {
         previous_result.innerHTML = previous_operation + operation
@@ -111,28 +107,32 @@ function update_result () {
     
 }
 
-function add_to_history () {
+function add_to_history () 
+{
     const new_history_item = document.createElement('li');
     new_history_item.innerHTML = `${previous_number.innerHTML} ${math_sign.innerHTML} ${current_number.innerHTML} = ${result}`
     new_history_item.classList.add('history_item');
     calculator_history.appendChild(new_history_item);
 }
 
-function clear_history () {
+function clear_history () 
+{
     calculator_history.textContent = '';
     if(calculator_history.textContent === '') {
         history_btn.classList.remove('active');
     }
 }
 
-function clear_screen () {
+function clear_screen () 
+{
     result = '';
     current_number.innerHTML = '';
     previous_number.innerHTML = '';
     math_sign.innerHTML = '';
 }
 
-function delate_number () {
+function delate_number () 
+{
     current_number.innerHTML = current_number.innerHTML.slice(0, -1);
 }
 
