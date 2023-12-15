@@ -1,0 +1,15 @@
+Wymagania:
+Do budowy aplikacji możesz wybrać język programowania według własnego uznania.
+Kalkulator powinien mieć prosty interfejs użytkownika, umożliwiający wprowadzanie liczb i wykonywanie podstawowych operacji: dodawania, odejmowania, mnożenia i dzielenia.
+Zaimplementuj funkcję "cofania", która pozwoli użytkownikowi na cofnięcie ostatniego obliczenia.
+Upewnij się, że kod jest dobrze zorganizowany i czytelny a tam, gdzie to konieczne, dodaj komentarze.
+
+Dostarczenie kodu:
+Udostępnij kod źródłowy za pośrednictwem publicznego repozytorium GitHub.
+Podaj jasne instrukcje, jak skonfigurować i uruchomić aplikację lokalnie.
+
+Kryteria oceny:
+Funkcjonalność: Czy kalkulator wykonuje podstawowe operacje arytmetyczne poprawnie? Czy funkcja cofania jest poprawnie zaimplementowana?
+Jakość kodu: Czy kod jest dobrze zorganizowany i czytelny?
+Interfejs użytkownika: Czy interfejs użytkownika jest intuicyjny i przyjazny dla użytkownika?
+Dokumentacja: Czy dokumentacja zawiera plik README z klarownymi instrukcjami?
