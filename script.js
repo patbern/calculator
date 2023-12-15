@@ -16,15 +16,17 @@ let result = '';
 //funkcje
 
 function display_numbers () 
-{
-    if(this.textContent === '.' && current_number.innerHTML.includes('.')) return;
-    if(this.textContent === '.' && current_number.innerHTML === '') return current_number.innerHTML = '.0';
-    
+{    
     current_number.innerHTML += this.textContent;
 }
 
 function operate () 
 {
+    if(this.textContent === '.' && current_number.innerHTML === '') return current_number.innerHTML = '0.0';
+    if(this.textContent === '.' && current_number.innerHTML.includes('')) return current_number.innerHTML += '.';
+ // tutaj: zabezpieczyć kod przed dodawaniem wielu kropek
+ // if(this.textContent === '.' && current_number.innerHTML.includes('.')) return current_number;
+    
     if(current_number.innerHTML === '' && this.textContent === '+/-') 
     {
         current_number.innerHTML = '-';
@@ -70,6 +72,7 @@ function show_results ()
             result = a * b;
             break;            
         case '÷':
+            // tutaj: zabezpieczyć przed dzieleniem przez 0
             // if (isNaN(a) || isNaN(b))
             // return;
             if(current_number === 0 || previous_number === 0)
