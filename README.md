@@ -1,0 +1,2 @@
+#kalkulator
+Prosta aplikacja kalkulatora
