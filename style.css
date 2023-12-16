@@ -27,7 +27,7 @@ body {
 
 .display {
     grid-column: 1/-1;
-    min-height: 20%;
+    min-height: 25%;
     max-height: min-content;
     background-color: rgba(103, 0, 199, 0.215);
     -webkit-box-shadow: 8px 8px 24px 0px rgba(66, 68, 90, 1);
@@ -45,17 +45,24 @@ body {
 }
 
 .current_number {
+    color: aliceblue;
     font-size: 35px;   
 }
 
-.pervious_number {
-    color: rgb(103, 0, 199);
+.previous_number {
+    color: rgba(240, 248, 255, 0.477);
     font-size: 20px;
 }
 
 .math_sign {
+    color: rgba(240, 248, 255, 0.477);
     font-size: 22px;
 }
+
+/* .result {
+    color: rgba(240, 248, 255, 0.477);
+    font-size: 20px;
+} */
 
 .panel {
     height: 80%;
@@ -138,6 +145,6 @@ button:hover {
     height:100%;
     top:0px;
     left:0px;
-    z-index:10000;
-    background-image:url(tp.png); /* required by MSIE to prevent actions on lower z-index elements */
+/*    z-index:10000;
+/*    background-image:url(tp.png); /* required by MSIE to prevent actions on lower z-index elements */
 }

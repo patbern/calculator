@@ -1,5 +1,5 @@
 const current_number = document.querySelector('.current_number');
-const previous_number = document.querySelector('.previous_number');
+const previous_number = document.querySelector('.previous_number p');
 const math_sign = document.querySelector('.math_sign');
 const number_buttons = document.querySelectorAll('.number');
 const operator_buttons = document.querySelectorAll('.operator');
@@ -9,6 +9,7 @@ const delate = document.querySelector('.delate');
 const calculator_history = document.querySelector('.history');
 const history_btn = document.querySelector('.history_btn');
 
+
 let previous_operation = '';
 let current_operation = '';
 let result = '';
@@ -16,17 +17,16 @@ let result = '';
 //funkcje
 
 function display_numbers () 
-{    
+{   
+    if(this.textContent === '.' && current_number.innerHTML.includes('.')) return;
+    if(this.textContent === '.' && current_number.innerHTML === '') return current_number.innerHTML = '0.0';
+    // if(this.textContent === '0' && current_number.innerHTML.includes('0')) return;
+    // if(this.textContent === '0' && current_number.innerHTML === '') return current_number.innerHTML = '0';  
     current_number.innerHTML += this.textContent;
 }
 
 function operate () 
 {
-    if(this.textContent === '.' && current_number.innerHTML === '') return current_number.innerHTML = '0.0';
-    if(this.textContent === '.' && current_number.innerHTML.includes('')) return current_number.innerHTML += '.';
- // tutaj: zabezpieczyć kod przed dodawaniem wielu kropek
- // if(this.textContent === '.' && current_number.innerHTML.includes('.')) return current_number;
-    
     if(current_number.innerHTML === '' && this.textContent === '+/-') 
     {
         current_number.innerHTML = '-';
@@ -67,15 +67,11 @@ function show_results ()
         case '-':
             result = b - a;
             break;
-        // case '&times':
         case '×':
             result = a * b;
             break;            
         case '÷':
-            // tutaj: zabezpieczyć przed dzieleniem przez 0
-            // if (isNaN(a) || isNaN(b))
-            // return;
-            if(current_number === 0 || previous_number === 0)
+            if(a === 0 || b === 0)
             {
                 alert("Niepoprawna operacja: dzielenie przez 0. \nWybierz inną liczbę :)");
                 clear_screen();
@@ -90,12 +86,14 @@ function show_results ()
             clear_screen();
             return;
     }
+//dodać funkcję, aby program nie dodawał do historii błędnych wyników np. samo '='
 
     add_to_history();
     history_btn.classList.add('active');
     current_number.innerHTML = result;
     previous_number.innerHTML = '';
     math_sign.innerHTML = '';
+
 }
 
 function update_result () 
@@ -107,7 +105,6 @@ function update_result ()
     else {
         previous_operation.innerHTML = ''
     }
-    
 }
 
 function add_to_history () 
