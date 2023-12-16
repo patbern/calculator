@@ -1,63 +1,65 @@
-const current_number = document.querySelector('.current_number');
-const previous_number = document.querySelector('.previous_number p');
-const math_sign = document.querySelector('.math_sign');
-const number_buttons = document.querySelectorAll('.number');
-const operator_buttons = document.querySelectorAll('.operator');
-const equals_button = document.querySelector('.equals');
-const clear_button = document.querySelector('.clear');
+const currentNumber = document.querySelector('.current-number');
+const previousNumber = document.querySelector('.previous-number p');
+const mathSign = document.querySelector('.math-sign');
+const numberButtons = document.querySelectorAll('.number');
+const operatorButtons = document.querySelectorAll('.operator');
+const equalsButton = document.querySelector('.equals');
+const clearButton = document.querySelector('.clear');
 const delate = document.querySelector('.delate');
-const calculator_history = document.querySelector('.history');
-const history_btn = document.querySelector('.history_btn');
+const calculatorHistory = document.querySelector('.history');
+const historyBtn = document.querySelector('.history-btn');
 
 
-let previous_operation = '';
-let current_operation = '';
+let previousOperation = '';
+let currentOperation = '';
 let result = '';
+let divisionByZeroBlocked = false;
 
 //funkcje
 
-function display_numbers () 
+function displayNumbers () 
 {   
-    if(this.textContent === '.' && current_number.innerHTML.includes('.')) return;
-    if(this.textContent === '.' && current_number.innerHTML === '') return current_number.innerHTML = '0.0';
-    // if(this.textContent === '0' && current_number.innerHTML.includes('0')) return;
-    // if(this.textContent === '0' && current_number.innerHTML === '') return current_number.innerHTML = '0';  
-    current_number.innerHTML += this.textContent;
+    if(this.textContent === '.' && currentNumber.innerHTML.includes('.')) return;
+    if(this.textContent === '.' && currentNumber.innerHTML === '') return currentNumber.innerHTML = '0.0';
+    //tutaj usunąć 0 przed wprowadzoną liczba.
+    // if(this.textContent === '0' && currentNumber.innerHTML === '0') return currentNumber.innerHTML.slice(1);
+    currentNumber.innerHTML += this.textContent;
 }
 
 function operate () 
 {
-    if(current_number.innerHTML === '' && this.textContent === '+/-') 
+    if(currentNumber.innerHTML === '' && this.textContent === '+/-') 
     {
-        current_number.innerHTML = '-';
+        currentNumber.innerHTML = '-';
         return;
     }
-    if(current_number.innerHTML === '-' && this.textContent === '+/-') 
+    if(currentNumber.innerHTML === '-' && this.textContent === '+/-') 
     {
-        current_number.innerHTML = '';
+        currentNumber.innerHTML = '';
         return;
     }
-    else if (current_number.innerHTML === '') 
+    //tutaj dodać funkcję, że jeśli jest już liczba i naciśniemy przycisk do dodaje '-', a nie przechodzi do następnego równania
+    else if (currentNumber.innerHTML === '') 
     {
         return;
     }
-    if(math_sign.innerHTML !== '') 
+    if(mathSign.innerHTML !== '') 
     {
-        show_results();
+        showResults();
     }
 
-    previous_number.innerHTML = current_number.innerHTML;
-    math_sign.innerHTML = this.textContent;
-    current_number.innerHTML = '';
+    previousNumber.innerHTML = currentNumber.innerHTML;
+    mathSign.innerHTML = this.textContent;
+    currentNumber.innerHTML = '';
 }
 
-function show_results () 
+function showResults () 
 {
-    if(previous_number.innerHTML === '' || current_number.innerHTML === '') return;
+    if(previousNumber.innerHTML === '' || currentNumber.innerHTML === '') return;
 
-    let a = Number(current_number.innerHTML);
-    let b = Number(previous_number.innerHTML);
-    let operator = math_sign.innerHTML;
+    let a = Number(currentNumber.innerHTML);
+    let b = Number(previousNumber.innerHTML);
+    let operator = mathSign.innerHTML;
 
     switch(operator) 
     {
@@ -74,8 +76,9 @@ function show_results ()
             if(a === 0 || b === 0)
             {
                 alert("Niepoprawna operacja: dzielenie przez 0. \nWybierz inną liczbę :)");
-                clear_screen();
-                break;
+                divisionByZeroBlocked = true;
+                clearScreen();
+                return;
             }
             else
             {
@@ -83,71 +86,72 @@ function show_results ()
                 break;
             } 
         default:
-            clear_screen();
+            clearScreen();
             return;
     }
-//dodać funkcję, aby program nie dodawał do historii błędnych wyników np. samo '='
 
-    add_to_history();
-    history_btn.classList.add('active');
-    current_number.innerHTML = result;
-    previous_number.innerHTML = '';
-    math_sign.innerHTML = '';
-
+    addToHistory();
+    historyBtn.classList.add('active');
+    currentNumber.innerHTML = result;
+    previousNumber.innerHTML = '';
+    mathSign.innerHTML = '';
 }
 
-function update_result () 
+function updateResult () 
 {
-    current_result.innerHTML = current_operation
+    currentResult.innerHTML = currentOperation
     if(operation != null) {
-        previous_result.innerHTML = previous_operation + operation
+        previousResult.innerHTML = previousOperation + operation
     }
     else {
-        previous_operation.innerHTML = ''
+        previousOperation.innerHTML = ''
     }
 }
 
-function add_to_history () 
+function addToHistory () 
 {
-    const new_history_item = document.createElement('li');
-    new_history_item.innerHTML = `${previous_number.innerHTML} ${math_sign.innerHTML} ${current_number.innerHTML} = ${result}`
-    new_history_item.classList.add('history_item');
-    calculator_history.appendChild(new_history_item);
+    if(divisionByZeroBlocked = true) {
+        const newHistoryItem = document.createElement('li');
+        newHistoryItem.innerHTML = `${previousNumber.innerHTML} ${mathSign.innerHTML} ${currentNumber.innerHTML} = ${result}`
+        newHistoryItem.classList.add('history-item');
+        calculatorHistory.appendChild(newHistoryItem);
+    }
+    divisionByZeroBlocked = false;
 }
 
-function clear_history () 
+function clearHistory () 
 {
-    calculator_history.textContent = '';
-    if(calculator_history.textContent === '') {
-        history_btn.classList.remove('active');
+    calculatorHistory.textContent = '';
+    if(calculatorHistory.textContent === '') {
+        historyBtn.classList.remove('active');
     }
 }
 
-function clear_screen () 
+function clearScreen () 
 {
     result = '';
-    current_number.innerHTML = '';
-    previous_number.innerHTML = '';
-    math_sign.innerHTML = '';
+    currentNumber.innerHTML = '';
+    previousNumber.innerHTML = '';
+    mathSign.innerHTML = '';
 }
 
-function delate_number () 
+function delateNumber () 
 {
-    current_number.innerHTML = current_number.innerHTML.slice(0, -1);
+    currentNumber.innerHTML = currentNumber.innerHTML.slice(0, -1);
 }
 
 //nasłuchiwanie przycisków
 
-operator_buttons.forEach((button) => button.addEventListener('click', operate));
+operatorButtons.forEach((button) => button.addEventListener('click', operate));
 
-equals_button.addEventListener('click', show_results, update_result);
+equalsButton.addEventListener('click', showResults, updateResult);
 
-clear_button.addEventListener('click', clear_screen);
+clearButton.addEventListener('click', clearScreen);
 
-number_buttons.forEach((button) => {
-    button.addEventListener('click', display_numbers)
+numberButtons.forEach((button) => {
+    button.addEventListener('click', displayNumbers)
 });
 
-history_btn.addEventListener('click', clear_history);
+historyBtn.addEventListener('click', clearHistory);
 
-delate.addEventListener('click', delate_number);
+delate.addEventListener('click', delateNumber);
