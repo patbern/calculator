@@ -8,38 +8,43 @@ const clearButton = document.querySelector('.clear');
 const delate = document.querySelector('.delate');
 const calculatorHistory = document.querySelector('.history');
 const historyBtn = document.querySelector('.history-btn');
+const undoHistoryBtn = document.querySelector('.history-undo-btn');
 const minus = document.querySelector('.minus')
 
 let result = '';
 let divisionByZeroBlocked = false;
+let lastActionOperator = false;
 
 //functions
 
-function handleNumberButtonPress () 
-{   
-    if (this.textContent === '.' && currentNumber.innerHTML.includes('.')) return;
-    if (!(this.textContent === '0' && currentNumber.innerHTML === '0.')) 
+function handleNumberButtonPress(event) {const buttonClicked = event.target.textContent;
+
+    if(buttonClicked === '.' && currentNumber.innerHTML.includes('.')) return;
+    // if(buttonClicked === '.' && currentNumber.innerHTML === '') return currentNumber.innerHTML = '0.';
+
+    if(!(buttonClicked === '0' && currentNumber.innerHTML === '0.')) 
     {
         currentNumber.innerHTML = currentNumber.innerHTML.replace(/^0+/, '');
     }
 
-    currentNumber.innerHTML += this.textContent;
-}
+    currentNumber.innerHTML += buttonClicked;
+    lastActionOperator = false;}
 
-function operate () 
-{
+function operate(event) {const buttonClicked = event.target.textContent;
+    if(lastActionOperator) return;
+    
     if(mathSign.innerHTML !== '') 
     {
         calculateResults();
     }
 
     previousNumber.innerHTML = currentNumber.innerHTML;
-    mathSign.innerHTML = this.textContent;
+    mathSign.innerHTML = buttonClicked;
     currentNumber.innerHTML = '';
-}
+    lastActionOperator = true;}
 
-function calculateResults () 
-{
+function calculateResults() {
+
     if(previousNumber.innerHTML === '' || currentNumber.innerHTML === '') return;
 
     let a = Number(currentNumber.innerHTML);
@@ -77,53 +82,51 @@ function calculateResults ()
 
     addToHistory();
     historyBtn.classList.add('active');
+    undoHistoryBtn.classList.add('active');
     currentNumber.innerHTML = result;
     previousNumber.innerHTML = '';
     mathSign.innerHTML = '';
-}
+    lastActionOperator = false;}
 
-function addToHistory () 
-{
-    if(divisionByZeroBlocked = true) {
+function addToHistory() {
+    if(divisionByZeroBlocked = true){
         const newHistoryItem = document.createElement('li');
         newHistoryItem.innerHTML = `${previousNumber.innerHTML} ${mathSign.innerHTML} ${currentNumber.innerHTML} = ${result}`
         newHistoryItem.classList.add('history-item');
-        calculatorHistory.appendChild(newHistoryItem);
-    }
-    divisionByZeroBlocked = false;
-}
+        calculatorHistory.appendChild(newHistoryItem);}
+    divisionByZeroBlocked = false;}
 
-function clearHistory () 
-{
-    calculatorHistory.textContent = '';
-    if(calculatorHistory.textContent === '') {
+function clearHistory(event) {const buttonClicked = event.target.textContent;
+
+    calculatorHistory.buttonClicked = '';
+    if(calculatorHistory.buttonClicked === '') {
         historyBtn.classList.remove('active');
-    }
+        undoHistoryBtn.classList.remove('active');}}
+
+function undo (event) {const buttonClicked = event.target.textContent;
+
 }
 
-function clearScreen () 
-{
+function clearScreen() {
     result = '';
     currentNumber.innerHTML = '';
     previousNumber.innerHTML = '';
-    mathSign.innerHTML = '';
-}
+    mathSign.innerHTML = '';}
 
-function delateNumber () 
-{
+function delateNumber() {
     currentNumber.innerHTML = currentNumber.innerHTML.slice(0, -1);
-}
+    lastActionOperator = false;}
 
-function addMinus ()
-{
-    if(currentNumber.innerHTML === '' && this.textContent === '+/-') 
+function addMinus (event){const buttonClicked = event.target.textContent;
+
+    if(currentNumber.innerHTML === '' && buttonClicked === '+/-') 
     {
     currentNumber.innerHTML = '-';
     return;
     }
         else 
         {
-        if(currentNumber.innerHTML.includes('-') && this.textContent === '+/-') 
+        if(currentNumber.innerHTML.includes('-') && buttonClicked === '+/-') 
         {
             currentNumber.innerHTML = currentNumber.innerHTML.replace('-', '');
             return;
@@ -131,10 +134,7 @@ function addMinus ()
         else
         {
             currentNumber.innerHTML = '-' + currentNumber.innerHTML;
-            return;
-        }
-    }
-}
+            return;}}}
 
 //listening for buttons
 
@@ -144,14 +144,12 @@ equalsButton.addEventListener('click', calculateResults);
 
 clearButton.addEventListener('click', clearScreen);
 
-numberButtons.forEach((button) => 
-{
-    button.addEventListener('click', handleNumberButtonPress)
-});
+numberButtons.forEach((button) => {button.addEventListener('click', handleNumberButtonPress); lastActionOperator = false;});
 
 historyBtn.addEventListener('click', clearHistory);
+
+undoHistoryBtn,addEventListener('click', undo)
 
 delate.addEventListener('click', delateNumber);
 
 minus.addEventListener('click', addMinus)
-

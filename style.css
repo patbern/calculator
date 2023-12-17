@@ -110,7 +110,7 @@ button:hover {
     padding-bottom: 10px;
 }
 
-.history-btn {
+.history-btn, .history-undo-btn {
     color: rgb(240, 224, 255);
     background-color: blueviolet;
     border: none;
@@ -125,7 +125,7 @@ button:hover {
     transition: all .3s ease-in-out;
 }
 
-.history-btn.active {
+.history-btn.active , .history-undo-btn.active{
     display: block;  
 }
 
