@@ -10,7 +10,6 @@ const calculatorHistory = document.querySelector('.history');
 const historyBtn = document.querySelector('.history-btn');
 const minus = document.querySelector('.minus')
 
-
 let previousOperation = '';
 let currentOperation = '';
 let result = '';

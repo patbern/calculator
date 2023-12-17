@@ -58,11 +58,6 @@ body {
     font-size: 22px;
 }
 
-/* .result {
-    color: rgba(240, 248, 255, 0.477);
-    font-size: 20px;
-} */
-
 .panel {
     height: 80%;
     display: grid;
@@ -135,14 +130,3 @@ button:hover {
     letter-spacing: 1px;
     border-bottom: 1px solid rgb(103, 0, 199);
 }
-
-/* #modalContainer {
-    background-color:rgba(0, 0, 0, 0.3);
-    position:absolute;
-    width:100%;
-    height:100%;
-    top:0px;
-    left:0px; */
-/*    z-index:10000;
-/*    background-image:url(tp.png); /* required by MSIE to prevent actions on lower z-index elements */
-/* } */
