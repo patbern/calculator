@@ -18,8 +18,6 @@ let divisionByZeroBlocked = false;
 function displayNumbers () 
 {   
     if (this.textContent === '.' && currentNumber.innerHTML.includes('.')) return;
-    if(this.textContent === '.' && currentNumber.innerHTML === '') return currentNumber.innerHTML = '0.';
-
     if (!(this.textContent === '0' && currentNumber.innerHTML === '0.')) 
     {
         currentNumber.innerHTML = currentNumber.innerHTML.replace(/^0+/, '');
