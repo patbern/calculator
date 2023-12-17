@@ -8,6 +8,7 @@ const clearButton = document.querySelector('.clear');
 const delate = document.querySelector('.delate');
 const calculatorHistory = document.querySelector('.history');
 const historyBtn = document.querySelector('.history-btn');
+const minus = document.querySelector('.minus')
 
 
 let previousOperation = '';
@@ -19,30 +20,21 @@ let divisionByZeroBlocked = false;
 
 function displayNumbers () 
 {   
-    if(this.textContent === '.' && currentNumber.innerHTML.includes('.')) return;
+    if (this.textContent === '.' && currentNumber.innerHTML.includes('.')) return;
     if(this.textContent === '.' && currentNumber.innerHTML === '') return currentNumber.innerHTML = '0.0';
-    //tutaj usunąć 0 przed wprowadzoną liczba.
-    // if(this.textContent === '0' && currentNumber.innerHTML === '0') return currentNumber.innerHTML.slice(1);
+    else 
+    {
+        // Usuwanie zbędnych zer przed liczbą (z wyjątkiem sytuacji, gdy liczba to zero z kropką)
+        if (!(this.textContent === '0' && currentNumber.innerHTML === '0.')) 
+        {
+            currentNumber.innerHTML = currentNumber.innerHTML.replace(/^0+/, '');
+        }
+    }
     currentNumber.innerHTML += this.textContent;
 }
 
 function operate () 
 {
-    if(currentNumber.innerHTML === '' && this.textContent === '+/-') 
-    {
-        currentNumber.innerHTML = '-';
-        return;
-    }
-    if(currentNumber.innerHTML === '-' && this.textContent === '+/-') 
-    {
-        currentNumber.innerHTML = '';
-        return;
-    }
-    //tutaj dodać funkcję, że jeśli jest już liczba i naciśniemy przycisk do dodaje '-', a nie przechodzi do następnego równania
-    else if (currentNumber.innerHTML === '') 
-    {
-        return;
-    }
     if(mathSign.innerHTML !== '') 
     {
         showResults();
@@ -140,6 +132,28 @@ function delateNumber ()
     currentNumber.innerHTML = currentNumber.innerHTML.slice(0, -1);
 }
 
+function addMinus ()
+{
+    if(currentNumber.innerHTML === '' && this.textContent === '+/-') 
+    {
+    currentNumber.innerHTML = '-';
+    return;
+    }
+        else 
+        {
+        if(currentNumber.innerHTML.includes('-') && this.textContent === '+/-') 
+        {
+            currentNumber.innerHTML = currentNumber.innerHTML.replace('-', '');
+            return;
+        }
+        else
+        {
+            currentNumber.innerHTML = '-' + currentNumber.innerHTML;
+            return;
+        }
+    }
+}
+
 //nasłuchiwanie przycisków
 
 operatorButtons.forEach((button) => button.addEventListener('click', operate));
@@ -148,10 +162,13 @@ equalsButton.addEventListener('click', showResults, updateResult);
 
 clearButton.addEventListener('click', clearScreen);
 
-numberButtons.forEach((button) => {
+numberButtons.forEach((button) => 
+{
     button.addEventListener('click', displayNumbers)
 });
 
 historyBtn.addEventListener('click', clearHistory);
 
 delate.addEventListener('click', delateNumber);
+
+minus.addEventListener('click', addMinus)

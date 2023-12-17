@@ -16,6 +16,7 @@ Funkcje kalkulatora:
 Zapezpieczenia:
 - Program blokuje dodawanie więcej niż jednego znaku '.'.
 - Kalkulator zabezpiecza przed dzieleniem przez 0: Przy próbie wykonania niepoprawnego działania pojawia się alert z informacją, a ekran zostaje wyczyszczony. 
+- Program usuwa zbędne zera dodane przed liczbą z wyjątkiem sytuacji, w której wprowadzona jest liczba '0.'.
 
 Historia:
 - Historia ostatnich działań jest zapisywana w panelu po prawej stronie.
