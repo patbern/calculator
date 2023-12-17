@@ -13,9 +13,9 @@ const minus = document.querySelector('.minus')
 let result = '';
 let divisionByZeroBlocked = false;
 
-//funkcje
+//functions
 
-function displayNumbers () 
+function handleNumberButtonPress () 
 {   
     if (this.textContent === '.' && currentNumber.innerHTML.includes('.')) return;
     if (!(this.textContent === '0' && currentNumber.innerHTML === '0.')) 
@@ -30,7 +30,7 @@ function operate ()
 {
     if(mathSign.innerHTML !== '') 
     {
-        showResults();
+        calculateResults();
     }
 
     previousNumber.innerHTML = currentNumber.innerHTML;
@@ -38,7 +38,7 @@ function operate ()
     currentNumber.innerHTML = '';
 }
 
-function showResults () 
+function calculateResults () 
 {
     if(previousNumber.innerHTML === '' || currentNumber.innerHTML === '') return;
 
@@ -136,17 +136,17 @@ function addMinus ()
     }
 }
 
-//nasłuchiwanie przycisków
+//listening for buttons
 
 operatorButtons.forEach((button) => button.addEventListener('click', operate));
 
-equalsButton.addEventListener('click', showResults);
+equalsButton.addEventListener('click', calculateResults);
 
 clearButton.addEventListener('click', clearScreen);
 
 numberButtons.forEach((button) => 
 {
-    button.addEventListener('click', displayNumbers)
+    button.addEventListener('click', handleNumberButtonPress)
 });
 
 historyBtn.addEventListener('click', clearHistory);
@@ -154,3 +154,4 @@ historyBtn.addEventListener('click', clearHistory);
 delate.addEventListener('click', delateNumber);
 
 minus.addEventListener('click', addMinus)
+
