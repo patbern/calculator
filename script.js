@@ -10,8 +10,6 @@ const calculatorHistory = document.querySelector('.history');
 const historyBtn = document.querySelector('.history-btn');
 const minus = document.querySelector('.minus')
 
-let previousOperation = '';
-let currentOperation = '';
 let result = '';
 let divisionByZeroBlocked = false;
 
@@ -88,17 +86,6 @@ function showResults ()
     mathSign.innerHTML = '';
 }
 
-function updateResult () 
-{
-    currentResult.innerHTML = currentOperation
-    if(operation != null) {
-        previousResult.innerHTML = previousOperation + operation
-    }
-    else {
-        previousOperation.innerHTML = ''
-    }
-}
-
 function addToHistory () 
 {
     if(divisionByZeroBlocked = true) {
@@ -157,7 +144,7 @@ function addMinus ()
 
 operatorButtons.forEach((button) => button.addEventListener('click', operate));
 
-equalsButton.addEventListener('click', showResults, updateResult);
+equalsButton.addEventListener('click', showResults);
 
 clearButton.addEventListener('click', clearScreen);
 
