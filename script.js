@@ -17,11 +17,11 @@ let lastActionOperator = false;
 
 //functions
 
-function handleNumberButtonPress(event) {const buttonClicked = event.target.textContent;
+function handleNumberButtonPress(event) {const buttonClicked = event.target.textContent; 
 
     if(buttonClicked === '.' && currentNumber.innerHTML.includes('.')) return;
     // if(buttonClicked === '.' && currentNumber.innerHTML === '') return currentNumber.innerHTML = '0.';
-
+    // if(buttonClicked === '0' && currentNumber.innerHTML !== '') 
     if(!(buttonClicked === '0' && currentNumber.innerHTML === '0.')) 
     {
         currentNumber.innerHTML = currentNumber.innerHTML.replace(/^0+/, '');
@@ -31,12 +31,10 @@ function handleNumberButtonPress(event) {const buttonClicked = event.target.text
     lastActionOperator = false;}
 
 function operate(event) {const buttonClicked = event.target.textContent;
+    
     if(lastActionOperator) return;
     
-    if(mathSign.innerHTML !== '') 
-    {
-        calculateResults();
-    }
+    if(mathSign.innerHTML !== '') {calculateResults();}
 
     previousNumber.innerHTML = currentNumber.innerHTML;
     mathSign.innerHTML = buttonClicked;
@@ -51,8 +49,7 @@ function calculateResults() {
     let b = Number(previousNumber.innerHTML);
     let operator = mathSign.innerHTML;
 
-    switch(operator) 
-    {
+    switch(operator) {
         case '+':
             result = a + b;
             break;
@@ -77,8 +74,7 @@ function calculateResults() {
             } 
         default:
             clearScreen();
-            return;
-    }
+            return;}
 
     addToHistory();
     historyBtn.classList.add('active');
@@ -98,8 +94,8 @@ function addToHistory() {
 
 function clearHistory(event) {const buttonClicked = event.target.textContent;
 
-    calculatorHistory.buttonClicked = '';
-    if(calculatorHistory.buttonClicked === '') {
+    calculatorHistory.textContent = '';
+    if(calculatorHistory.textContent === '') {
         historyBtn.classList.remove('active');
         undoHistoryBtn.classList.remove('active');}}
 
@@ -117,22 +113,16 @@ function delateNumber() {
     currentNumber.innerHTML = currentNumber.innerHTML.slice(0, -1);
     lastActionOperator = false;}
 
-function addMinus (event){const buttonClicked = event.target.textContent;
+function addMinus(event) {const buttonClicked = event.target.textContent;
 
-    if(currentNumber.innerHTML === '' && buttonClicked === '+/-') 
-    {
+    if(currentNumber.innerHTML === '' && buttonClicked === '+/-') {
     currentNumber.innerHTML = '-';
-    return;
-    }
-        else 
-        {
-        if(currentNumber.innerHTML.includes('-') && buttonClicked === '+/-') 
-        {
+    return;}
+        else {
+        if(currentNumber.innerHTML.includes('-') && buttonClicked === '+/-') {
             currentNumber.innerHTML = currentNumber.innerHTML.replace('-', '');
-            return;
-        }
-        else
-        {
+            return;}
+        else{
             currentNumber.innerHTML = '-' + currentNumber.innerHTML;
             return;}}}
 
@@ -144,7 +134,7 @@ equalsButton.addEventListener('click', calculateResults);
 
 clearButton.addEventListener('click', clearScreen);
 
-numberButtons.forEach((button) => {button.addEventListener('click', handleNumberButtonPress); lastActionOperator = false;});
+numberButtons.forEach((button) => {button.addEventListener('click', e => handleNumberButtonPress(e)), lastActionOperator = false});
 
 historyBtn.addEventListener('click', clearHistory);
 
