@@ -18,14 +18,12 @@ let lastActionOperator = false;
 //functions
 
 function handleNumberButtonPress(event) {const buttonClicked = event.target.textContent; 
-
+    
     if(buttonClicked === '.' && currentNumber.innerHTML.includes('.')) return;
     // if(buttonClicked === '.' && currentNumber.innerHTML === '') return currentNumber.innerHTML = '0.';
     // if(buttonClicked === '0' && currentNumber.innerHTML !== '') 
-    if(!(buttonClicked === '0' && currentNumber.innerHTML === '0.')) 
-    {
-        currentNumber.innerHTML = currentNumber.innerHTML.replace(/^0+/, '');
-    }
+    if(!(buttonClicked === '0' && currentNumber.innerHTML === '0.')) {
+        currentNumber.innerHTML = currentNumber.innerHTML.replace(/^0+/, '');}
 
     currentNumber.innerHTML += buttonClicked;
     lastActionOperator = false;}
@@ -99,7 +97,7 @@ function clearHistory(event) {const buttonClicked = event.target.textContent;
         historyBtn.classList.remove('active');
         undoHistoryBtn.classList.remove('active');}}
 
-function undo (event) {const buttonClicked = event.target.textContent;
+function undo(event) {const buttonClicked = event.target.textContent;
 
 }
 
@@ -111,6 +109,7 @@ function clearScreen() {
 
 function delateNumber() {
     currentNumber.innerHTML = currentNumber.innerHTML.slice(0, -1);
+    // mathSign.innerHTML = mathSign.innerHTML.slice(0, -1);
     lastActionOperator = false;}
 
 function addMinus(event) {const buttonClicked = event.target.textContent;
