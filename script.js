@@ -14,6 +14,7 @@ const minus = document.querySelector('.minus')
 let result = '';
 let divisionByZeroBlocked = false;
 let lastActionOperator = false;
+const lastHistory = [];
 
 //functions
 
@@ -87,7 +88,8 @@ function addToHistory() {
         const newHistoryItem = document.createElement('li');
         newHistoryItem.innerHTML = `${previousNumber.innerHTML} ${mathSign.innerHTML} ${currentNumber.innerHTML} = ${result}`
         newHistoryItem.classList.add('history-item');
-        calculatorHistory.appendChild(newHistoryItem);}
+        calculatorHistory.appendChild(newHistoryItem);
+        lastHistory.push(newHistoryItem.innerHTML);}
     divisionByZeroBlocked = false;}
 
 function clearHistory(event) {const buttonClicked = event.target.textContent;
@@ -99,7 +101,12 @@ function clearHistory(event) {const buttonClicked = event.target.textContent;
 
 function undo(event) {const buttonClicked = event.target.textContent;
 
-}
+    if (lastHistory.length > 0 && buttonClicked === 'Cofnij') {
+        calculatorHistory.removeChild(calculatorHistory.lastChild);}
+
+    if (lastHistory.length === 0) {
+        undoHistoryBtn.classList.remove('active');
+        historyBtn.classList.remove('active');}}
 
 function clearScreen() {
     result = '';
@@ -128,17 +135,11 @@ function addMinus(event) {const buttonClicked = event.target.textContent;
 //listening for buttons
 
 operatorButtons.forEach((button) => button.addEventListener('click', operate));
-
 equalsButton.addEventListener('click', calculateResults);
-
 clearButton.addEventListener('click', clearScreen);
-
 numberButtons.forEach((button) => {button.addEventListener('click', e => handleNumberButtonPress(e)), lastActionOperator = false});
-
 historyBtn.addEventListener('click', clearHistory);
-
-undoHistoryBtn,addEventListener('click', undo)
-
+undoHistoryBtn.addEventListener('click', undo);
 delate.addEventListener('click', delateNumber);
-
-minus.addEventListener('click', addMinus)
+minus.addEventListener('click', addMinus);
+undoHistoryBtn.addEventListener('click', undo);
