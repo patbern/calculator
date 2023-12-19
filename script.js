@@ -101,8 +101,7 @@ function clearHistory(event) {const buttonClicked = event.target.textContent;
 
 function undo(event) {const buttonClicked = event.target.textContent;
 
-    if (lastHistory.length > 0 && buttonClicked === 'Cofnij') {
-        calculatorHistory.removeChild(calculatorHistory.lastChild);}
+    if (lastHistory.length > 0 && buttonClicked === 'Cofnij') {calculatorHistory.removeChild(calculatorHistory.lastChild);}
 
     if (lastHistory.length === 0) {
         undoHistoryBtn.classList.remove('active');
