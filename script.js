@@ -21,7 +21,7 @@ const lastHistory = [];
 function handleNumberButtonPress(event) {const buttonClicked = event.target.textContent; 
     
     if(buttonClicked === '.' && currentNumber.innerHTML.includes('.')) return;
-    // if(buttonClicked === '.' && currentNumber.innerHTML === '') return currentNumber.innerHTML = '0.';
+    if(buttonClicked === '.' && currentNumber.innerHTML === '') return currentNumber.innerHTML = '0.';
     // if(buttonClicked === '0' && currentNumber.innerHTML !== '') 
     if(!(buttonClicked === '0' && currentNumber.innerHTML === '0.')) {
         currentNumber.innerHTML = currentNumber.innerHTML.replace(/^0+/, '');}
