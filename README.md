@@ -23,14 +23,14 @@ Funkcje kalkulatora:
 
 Zapezpieczenia:
 - Program blokuje dodawanie więcej niż jednego znaku '.'.
-- Kalkulator zabezpiecza przed dzieleniem przez 0: Przy próbie wykonania niepoprawnego działania pojawia się alert z informacją, a ekran zostaje wyczyszczony. 
+- Kalkulator zabezpiecza przed dzieleniem przez '0': Przy próbie wykonania niepoprawnego działania pojawia się alert z informacją, a ekran zostaje wyczyszczony. 
 - Program usuwa zbędne zera dodane przed liczbą.
 
 Historia:
 - Historia ostatnich działań jest zapisywana w panelu po prawej stronie.
 - Przycisk czyszczenia histori: za pomocą przycisku "Wyczyść" usuwamy cały zapis historii.
 - W przypadku większej ilości rekordów pojawia się pasek przewijania.
-- Błędne rekordy związane z dzieleniem przez 0 nie zapisują się w historii.
+- Błędne rekordy związane z dzieleniem przez '0' nie zapisują się w historii.
 
 Modernizacja kodu w przyszłości:
 - umożliwienie użytkownikowi swobodnej zmiany znaku bez konieczności używania przycisku usuwania.
@@ -38,4 +38,5 @@ Modernizacja kodu w przyszłości:
 - funkcja cofania więcej niż jednej operacji.
 - dodanie więcej funkcji wykonywanych operacji takich jak np. potęgowanie, czy pierwiastkowanie.
 - wystylizowanie lepszego graficznie alertu wskazującego na wykonanie błędnej operacji.
-- dodanie funkcji zaokrąglania liczb do dwóch miejsc po przecinku.
+- dodanie funkcji zaokrąglania liczb niecałkowitych do dwóch miejsc po przecinku.
+- wykluczenie usuwania '0' przed liczbą niecałkowitą np. gdy użytkownik wybiera liczbę '0.1'.
