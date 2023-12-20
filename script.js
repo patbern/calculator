@@ -12,7 +12,8 @@ const undoHistoryBtn = document.querySelector('.history-undo-btn');
 const minus = document.querySelector('.minus')
 
 let result = '';
-// let previousResult = ''
+let previousResult = ''
+let currentResult = '';
 let divisionByZeroBlocked = false;
 let lastActionOperator = false;
 const lastHistory = [];
@@ -21,6 +22,7 @@ const lastHistory = [];
 
 function initializeCalculator() {
     clearScreen();
+    currentResult = '0';
     currentNumber.innerHTML = '0';}
 
 function display(event) {const buttonClicked = event.target.textContent; 
@@ -36,13 +38,14 @@ function display(event) {const buttonClicked = event.target.textContent;
 function operate(event) {const buttonClicked = event.target.textContent;
     
     if(lastActionOperator) return;
-    
     if(mathSign.innerHTML !== '') {calculateResults();}
 
     previousNumber.innerHTML = currentNumber.innerHTML;
     mathSign.innerHTML = buttonClicked;
     currentNumber.innerHTML = '';
-    lastActionOperator = true;}
+    lastActionOperator = true;
+
+    if(!(result === 0)) return updateResults(buttonClicked);}
 
 function calculateResults() {
 
@@ -63,18 +66,14 @@ function calculateResults() {
             result = a * b;
             break;            
         case '÷':
-            if(a === 0 || b === 0)
-            {
-                alert("Niepoprawna operacja: dzielenie przez 0. \nWybierz inną liczbę :)");
+            if(a === 0 || b === 0){
+                alert("Invalid operation: division by 0.\nChoose another number :)");
                 divisionByZeroBlocked = true;
                 clearScreen();
-                return;
-            }
-            else
-            {
+                return;}
+            else{
                 result = b / a;
-                break;
-            } 
+                break;} 
         default:
             clearScreen();
             return;}
@@ -83,19 +82,21 @@ function calculateResults() {
     historyBtn.classList.add('active');
     undoHistoryBtn.classList.add('active');
     currentNumber.innerHTML = result;
-    // result = previousResult;
+    currentResult = result;
+    console.log(currentResult)
     previousNumber.innerHTML = '';
     mathSign.innerHTML = '';
     lastActionOperator = false;}
 
 function addToHistory() {
-    if(divisionByZeroBlocked = true){
+    if(divisionByZeroBlocked = true) {
         const newHistoryItem = document.createElement('li');
         newHistoryItem.innerHTML = `${previousNumber.innerHTML} ${mathSign.innerHTML} ${currentNumber.innerHTML} = ${result}`
         newHistoryItem.classList.add('history-item');
         calculatorHistory.appendChild(newHistoryItem);
-        lastHistory.push(newHistoryItem.innerHTML);}
-        // previousResult = result;
+        lastHistory.push(newHistoryItem.innerHTML);
+        previousResult = currentResult;}
+        console.log(previousResult)
     divisionByZeroBlocked = false;}
 
 function clearHistory(event) {const buttonClicked = event.target.textContent;
@@ -107,24 +108,22 @@ function clearHistory(event) {const buttonClicked = event.target.textContent;
 
 function undo(event) {const buttonClicked = event.target.textContent;
 
-    if (lastHistory.length > 0 && buttonClicked === 'Cofnij') {calculatorHistory.removeChild(calculatorHistory.lastChild);}
-
-    if (lastHistory.length === 0) {
+    if(lastHistory.length > 0 && buttonClicked) {calculatorHistory.removeChild(calculatorHistory.lastChild);}
+    if(lastHistory.length === 0) {
         undoHistoryBtn.classList.remove('active');
         historyBtn.classList.remove('active');}
-    // if (previousResult !== '') {
-    //     result = previousResult;
-    //     currentNumber.innerHTML = result;
-    //     previousResult = '';}
-}
+    if(previousResult !== '') {
+        currentResult = previousResult;
+        currentNumber.innerHTML = currentResult;
+        console.log(currentResult)
+        updateResults();}}
 
-// function updateResults(event) {const buttonClicked = event ? event.target.textContent : null;
-//     if(undo(event)){return previousResult}
-//     else {return result}}
+function updateResults(buttonClicked) {
+    if(buttonClicked) {return currentNumber.innerHTML = previousResult;}
+    else {return result}}
 
 function clearScreen() {
     result = '';
-    // previousResult = ''
     currentNumber.innerHTML = '0';
     previousNumber.innerHTML = '';
     mathSign.innerHTML = '';}
@@ -142,7 +141,7 @@ function addMinus(event) {const buttonClicked = event.target.textContent;
         if(currentNumber.innerHTML.includes('-') && buttonClicked === '+/-') {
             currentNumber.innerHTML = currentNumber.innerHTML.replace('-', '');
             return;}
-        else{
+        else {
             currentNumber.innerHTML = '-' + currentNumber.innerHTML;
             return;}}}
 
