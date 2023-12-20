@@ -1,6 +1,7 @@
-*kalkulator*
+*Kalkulator* jest prostą aplikacją z interfejsem graficznym do wykonywania podstawowych obliczeń.
 
-'Kalkulator' jest prostą aplikacją z interfejsem graficznym do wykonywania podstawowych operacji.
+Program można uruchomić poprzez link: 
+lub poprzez pobranie repozytorium lokalnie na swój komputer i uruchomienie pliku index.html
 
 Użyte technologie:
 - HTML
@@ -32,8 +33,9 @@ Historia:
 - Błędne rekordy związane z dzieleniem przez 0 nie zapisują się w historii.
 
 Modernizacja kodu w przyszłości:
-- umożliwienie użytkownikowi swobodnej zmiany znaku bez konieczności używania przycisku cofania.
+- umożliwienie użytkownikowi swobodnej zmiany znaku bez konieczności używania przycisku usuwania.
 - w przypadku wykonania błędnej operacji np. dzielenia przez '0' użytkownik będzie mógł cofnąć wyświetlany wynik do momentu przed wystąpieniem błędu.
 - funkcja cofania więcej niż jednej operacji.
 - dodanie więcej funkcji wykonywanych operacji takich jak np. potęgowanie, czy pierwiastkowanie.
 - wystylizowanie lepszego graficznie alertu wskazującego na wykonanie błędnej operacji.
+- dodanie funkcji zaokrąglania liczb do dwóch miejsc po przecinku.
