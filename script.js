@@ -14,7 +14,6 @@ const minus = document.querySelector('.minus')
 let result = '';
 let previousResult = ''
 let currentResult = '';
-let divisionByZeroBlocked = false;
 let lastActionOperator = false;
 const lastHistory = [];
 
@@ -28,8 +27,8 @@ function initializeCalculator() {
 function display(event) {const buttonClicked = event.target.textContent; 
     
     if(buttonClicked === '.' && currentNumber.innerHTML.includes('.')) return;
-    if(buttonClicked === '.' && currentNumber.innerHTML === '') return currentNumber.innerHTML = '0.';
-    if(buttonClicked === '.' && currentNumber.innerHTML === '0') return currentNumber.innerHTML = '0.';
+    if(buttonClicked === '.' && currentNumber.innerHTML === '' || buttonClicked === '.' && currentNumber.innerHTML === '0') return currentNumber.innerHTML = '0.';
+
     if(!(buttonClicked === '0' && currentNumber.innerHTML === '0.')) {
         currentNumber.innerHTML = currentNumber.innerHTML.replace(/^0+/, '');}
 
@@ -69,8 +68,8 @@ function calculateResults() {
         case '÷':
             if(a === 0 || b === 0){
                 alert("Invalid operation: division by 0.\nChoose another number :)");
-                divisionByZeroBlocked = true;
                 clearScreen();
+                // undo();
                 return;}
             else{
                 result = b / a;
@@ -84,21 +83,18 @@ function calculateResults() {
     undoHistoryBtn.classList.add('active');
     currentNumber.innerHTML = result;
     currentResult = result;
-    console.log(currentResult)
     previousNumber.innerHTML = '';
     mathSign.innerHTML = '';
     lastActionOperator = false;}
 
 function addToHistory() {
-    if(divisionByZeroBlocked = true) {
-        const newHistoryItem = document.createElement('li');
-        newHistoryItem.innerHTML = `${previousNumber.innerHTML} ${mathSign.innerHTML} ${currentNumber.innerHTML} = ${result}`
-        newHistoryItem.classList.add('history-item');
-        calculatorHistory.appendChild(newHistoryItem);
-        lastHistory.push(newHistoryItem.innerHTML);
-        previousResult = currentResult;}
-        console.log(previousResult)
-    divisionByZeroBlocked = false;}
+    
+    const newHistoryItem = document.createElement('li');
+    newHistoryItem.innerHTML = `${previousNumber.innerHTML} ${mathSign.innerHTML} ${currentNumber.innerHTML} = ${result}`
+    newHistoryItem.classList.add('history-item');
+    calculatorHistory.appendChild(newHistoryItem);
+    lastHistory.push(newHistoryItem.innerHTML);
+    previousResult = currentResult;}
 
 function clearHistory(event) {const buttonClicked = event.target.textContent;
 
@@ -116,8 +112,7 @@ function undo(event) {const buttonClicked = event.target.textContent;
     if(previousResult !== '') {
         currentResult = previousResult;
         currentNumber.innerHTML = currentResult;
-        console.log(currentResult)
-        updateResults();}}
+        updateResults(buttonClicked);}}
 
 function updateResults(buttonClicked) {
     if(buttonClicked) {return previousResult;}

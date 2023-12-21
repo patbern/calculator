@@ -35,9 +35,8 @@ Historia:
 Modernizacja kodu w przyszłości:
 - umożliwienie użytkownikowi swobodnej zmiany znaku bez konieczności używania przycisku usuwania.
 - w przypadku wykonania błędnej operacji np. dzielenia przez '0' użytkownik będzie mógł cofnąć wyświetlany wynik do momentu przed wystąpieniem błędu.
-- funkcja cofania więcej niż jednej operacji.
+- funkcja cofania więcej niż jednej operacji z rzędu.
 - dodanie więcej funkcji wykonywanych operacji takich jak np. potęgowanie, czy pierwiastkowanie.
 - wystylizowanie lepszego graficznie alertu wskazującego na wykonanie błędnej operacji.
-- dodanie funkcji zaokrąglania liczb niecałkowitych do dwóch miejsc po przecinku.
+- dodanie funkcji zaokrąglania liczb niecałkowitych np. do dwóch miejsc po przecinku.
 - wykluczenie usuwania '0' przed liczbą niecałkowitą np. gdy użytkownik wybiera liczbę '0.1'.
-- dodanie możliwości cofania ostatniej operacji po wcześniejszym wykonaniu przez użytkownika operacji czyszczenia ekranu (clear).
