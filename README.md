@@ -40,3 +40,4 @@ Modernizacja kodu w przyszłości:
 - wystylizowanie lepszego graficznie alertu wskazującego na wykonanie błędnej operacji.
 - dodanie funkcji zaokrąglania liczb niecałkowitych do dwóch miejsc po przecinku.
 - wykluczenie usuwania '0' przed liczbą niecałkowitą np. gdy użytkownik wybiera liczbę '0.1'.
+- dodanie możliwości cofania ostatniej operacji po wcześniejszym wykonaniu przez użytkownika operacji czyszczenia ekranu (clear).

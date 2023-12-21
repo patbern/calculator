@@ -29,6 +29,7 @@ function display(event) {const buttonClicked = event.target.textContent;
     
     if(buttonClicked === '.' && currentNumber.innerHTML.includes('.')) return;
     if(buttonClicked === '.' && currentNumber.innerHTML === '') return currentNumber.innerHTML = '0.';
+    if(buttonClicked === '.' && currentNumber.innerHTML === '0') return currentNumber.innerHTML = '0.';
     if(!(buttonClicked === '0' && currentNumber.innerHTML === '0.')) {
         currentNumber.innerHTML = currentNumber.innerHTML.replace(/^0+/, '');}
 
@@ -119,11 +120,13 @@ function undo(event) {const buttonClicked = event.target.textContent;
         updateResults();}}
 
 function updateResults(buttonClicked) {
-    if(buttonClicked) {return currentNumber.innerHTML = previousResult;}
+    if(buttonClicked) {return previousResult;}
     else {return result}}
 
 function clearScreen() {
     result = '';
+    previousResult = '';
+    currentResult = '';
     currentNumber.innerHTML = '0';
     previousNumber.innerHTML = '';
     mathSign.innerHTML = '';}
