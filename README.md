@@ -1,40 +1,40 @@
-*Kalkulator* jest prostą aplikacją z interfejsem graficznym do wykonywania podstawowych obliczeń.
+*Calculator* is an aplication with simple graphical interface for basic calculations. 
 
-Program można uruchomić poprzez link: https://patbern.github.io/kalkulator/
-lub poprzez pobranie repozytorium lokalnie na swój komputer i uruchomienie pliku index.html
+You can run the program by following this link: https://patbern.github.io/calculator/
+or by downloading the repository locally to your computer and running index.html file.
 
-Użyte technologie:
+Used technologies:
 - HTML
 - CSS
 - Javascript
 
-Funkcje kalkulatora:
-- dodawanie (+)
-- odejmowanie (-)
-- mnożenie (×)
-- dzielenie (÷)
-- usuwanie zawartości (C)
-- usuwanie (DEL)
-- wynik (=)
-- liczby ujemne (+/-)
-- historia ostatnich działań (last operations)
-- cofanie ostatniej operacji (undo)
-- czyszczenie historii kalkulatora (clear)
+Calculator functions:
+- addition (+)
+- substraction (-)
+- multiplication (×)
+- division (÷)
+- clear entry (C)
+- delete (DEL)
+- equals (=)
+- negative numbers (+/-)
+- last operations history (last operations)
+- undo last operations (undo)
+- clear calculator history (clear)
 
-Zapezpieczenia:
-- Program blokuje dodawanie więcej niż jednego znaku '.'.
-- Kalkulator zabezpiecza przed dzieleniem przez '0': Przy próbie wykonania niepoprawnego działania pojawia się alert z informacją, a ekran zostaje wyczyszczony. 
-- Program usuwa zbędne zera dodane przed liczbą.
+Security measures:
+- Program prevents the entry of more than one '.' character.
+- Calculator protects against division by '0': Attempting an invalid operation triggers an alert, and the screen is cleared.
+- Program removes unnesessary zeros loading before number.
 
-Historia:
-- Historia ostatnich działań jest zapisywana w panelu po prawej stronie.
-- Przycisk czyszczenia histori: za pomocą przycisku "Wyczyść" usuwamy cały zapis historii.
-- W przypadku większej ilości rekordów pojawia się pasek przewijania.
-- Błędne rekordy związane z dzieleniem przez '0' nie zapisują się w historii.
+History panel:
+- Last operations history is saved in panel on the right side.
+- Clear history button: using the 'clear' button removes the entire history log.
+- In case of a large number of history records apears a scrollbar.
+- Incorrect records related to division by zero does'nt saved in the history.
 
-Modernizacja kodu w przyszłości:
-- umożliwienie użytkownikowi swobodnej zmiany znaku bez konieczności używania przycisku usuwania.
-- dodanie więcej funkcji wykonywanych operacji takich jak np. potęgowanie, czy pierwiastkowanie.
-- wystylizowanie lepszego graficznie alertu wskazującego na wykonanie błędnej operacji.
-- dodanie funkcji zaokrąglania liczb niecałkowitych np. do dwóch miejsc po przecinku.
-- wykluczenie usuwania '0' przed liczbą niecałkowitą np. gdy użytkownik wybiera liczbę '0.1'.
+Future code upgrades:
+- Allow users to freely change the math sign without using the delete button.
+- Add more functions for opperations such as exponentiation ora square rooting.
+- Improve the graphical styling of the alerts for invalid operations.
+- Add function to round non-integer numbers, e.g. to two decimal places.
+- Exclude removal of '0' before a non-integer number, e.g. when user entres the number '0.1'.

@@ -13,7 +13,7 @@ const minus = document.querySelector('.minus')
 
 let result = '';
 let lastActionOperator = false;
-const resultsHistory = [0];
+const resultsHistory = [];
 
 //functions
 
