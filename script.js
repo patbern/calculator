@@ -9,7 +9,7 @@ const delate = document.querySelector('.delate');
 const calculatorHistory = document.querySelector('.history');
 const historyBtn = document.querySelector('.history-btn');
 const undoHistoryBtn = document.querySelector('.history-undo-btn');
-const minus = document.querySelector('.minus')
+const minus = document.querySelector('.minus');
 
 let result = '';
 let lastActionOperator = false;
@@ -27,10 +27,12 @@ function display(event) {
     if(buttonClicked === '.' && currentNumber.innerHTML === '' || buttonClicked === '.' && currentNumber.innerHTML === '0') return currentNumber.innerHTML = '0.';
 
     if(!(buttonClicked === '0' && currentNumber.innerHTML === '0.')) {
-        currentNumber.innerHTML = currentNumber.innerHTML.replace(/^0+/, '');}
+        currentNumber.innerHTML = currentNumber.innerHTML.replace(/^0+/, '');
+    }
 
     currentNumber.innerHTML += buttonClicked;
-    lastActionOperator = false;}
+    lastActionOperator = false;
+}
 
 function operate(event) {
     
@@ -42,7 +44,8 @@ function operate(event) {
     previousNumber.innerHTML = currentNumber.innerHTML;
     mathSign.innerHTML = buttonClicked;
     currentNumber.innerHTML = '';
-    lastActionOperator = true;}
+    lastActionOperator = true;
+}
 
 function calculateResults() {
 
@@ -63,18 +66,21 @@ function calculateResults() {
             result = a * b;
             break;            
         case '÷':
-            if(a === 0 || b === 0){
+            if(a === 0 || b === 0) {
                 alert("Invalid operation: division by 0.\nChoose another number :)");
                 currentNumber.innerHTML = currentResult;
                 previousNumber.innerHTML = '';
                 mathSign.innerHTML = '';
-                return;}
-            else{
+                return;
+            }
+            else {
                 result = b / a;
-                break;} 
+                break;
+            } 
         default:
             clearScreen();
-            return;}
+            return;
+        }
 
     addToHistory();
     historyBtn.classList.add('active');
@@ -83,22 +89,26 @@ function calculateResults() {
     currentResult = result;
     previousNumber.innerHTML = '';
     mathSign.innerHTML = '';
-    lastActionOperator = false;}
+    lastActionOperator = false;
+}
 
 function addToHistory() {
 
     const newHistoryItem = document.createElement('li');
-    newHistoryItem.innerHTML = `${previousNumber.innerHTML} ${mathSign.innerHTML} ${currentNumber.innerHTML} = ${result}`
+    newHistoryItem.innerHTML = `${previousNumber.innerHTML} ${mathSign.innerHTML} ${currentNumber.innerHTML} = ${result}`;
     newHistoryItem.classList.add('history-item');
     calculatorHistory.appendChild(newHistoryItem);
-    resultsHistory.push(currentResult);}
+    resultsHistory.push(currentResult);
+}
 
 function clearHistory() {
     
     calculatorHistory.textContent = '';
     if(calculatorHistory.textContent === '') {
         historyBtn.classList.remove('active');
-        undoHistoryBtn.classList.remove('active');}}
+        undoHistoryBtn.classList.remove('active');
+    }
+}
 
 function undo() {
 
@@ -106,10 +116,13 @@ function undo() {
         const previousResult = resultsHistory.pop();
         calculatorHistory.removeChild(calculatorHistory.lastChild);
         currentResult = previousResult;
-        currentNumber.innerHTML = currentResult;}
-    if(resultsHistory.length === 0){
+        currentNumber.innerHTML = currentResult;
+    }
+    if(resultsHistory.length === 0) {
         undoHistoryBtn.classList.remove('active');
-        historyBtn.classList.remove('active');}}
+        historyBtn.classList.remove('active');
+    }
+}
 
 function clearScreen() {
 
@@ -117,12 +130,14 @@ function clearScreen() {
     currentResult = '';
     currentNumber.innerHTML = '0';
     previousNumber.innerHTML = '';
-    mathSign.innerHTML = '';}
+    mathSign.innerHTML = '';
+}
 
 function delateNumber() {
     
     currentNumber.innerHTML = currentNumber.innerHTML.slice(0, -1);
-    lastActionOperator = false;}
+    lastActionOperator = false;
+}
 
 function addMinus(event) {
     
@@ -130,14 +145,19 @@ function addMinus(event) {
 
     if(currentNumber.innerHTML === '' && buttonClicked === '+/-') {
     currentNumber.innerHTML = '-';
-    return;}
+    return;
+    }
         else {
         if(currentNumber.innerHTML.includes('-') && buttonClicked === '+/-') {
             currentNumber.innerHTML = currentNumber.innerHTML.replace('-', '');
-            return;}
+            return;
+        }
         else {
             currentNumber.innerHTML = '-' + currentNumber.innerHTML;
-            return;}}}
+            return;
+        }
+    }
+}
 
 //listening for buttons
 
