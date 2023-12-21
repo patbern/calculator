@@ -34,7 +34,6 @@ Historia:
 
 Modernizacja kodu w przyszłości:
 - umożliwienie użytkownikowi swobodnej zmiany znaku bez konieczności używania przycisku usuwania.
-- funkcja cofania więcej niż jednej operacji z rzędu.
 - dodanie więcej funkcji wykonywanych operacji takich jak np. potęgowanie, czy pierwiastkowanie.
 - wystylizowanie lepszego graficznie alertu wskazującego na wykonanie błędnej operacji.
 - dodanie funkcji zaokrąglania liczb niecałkowitych np. do dwóch miejsc po przecinku.

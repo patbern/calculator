@@ -12,19 +12,16 @@ const undoHistoryBtn = document.querySelector('.history-undo-btn');
 const minus = document.querySelector('.minus')
 
 let result = '';
-let previousResult = ''
-let currentResult = '';
 let lastActionOperator = false;
-const lastHistory = [];
+const resultsHistory = [0];
 
 //functions
 
-function initializeCalculator() {
-    clearScreen();
-    currentResult = '0';
-    currentNumber.innerHTML = '0';}
+function initializeCalculator() {clearScreen();}
 
-function display(event) {const buttonClicked = event.target.textContent; 
+function display(event) {
+    
+    const buttonClicked = event.target.textContent; 
     
     if(buttonClicked === '.' && currentNumber.innerHTML.includes('.')) return;
     if(buttonClicked === '.' && currentNumber.innerHTML === '' || buttonClicked === '.' && currentNumber.innerHTML === '0') return currentNumber.innerHTML = '0.';
@@ -35,7 +32,9 @@ function display(event) {const buttonClicked = event.target.textContent;
     currentNumber.innerHTML += buttonClicked;
     lastActionOperator = false;}
 
-function operate(event) {const buttonClicked = event.target.textContent;
+function operate(event) {
+    
+    const buttonClicked = event.target.textContent;
     
     if(lastActionOperator) return;
     if(mathSign.innerHTML !== '') {calculateResults();}
@@ -43,9 +42,7 @@ function operate(event) {const buttonClicked = event.target.textContent;
     previousNumber.innerHTML = currentNumber.innerHTML;
     mathSign.innerHTML = buttonClicked;
     currentNumber.innerHTML = '';
-    lastActionOperator = true;
-
-    if(!(result === 0)) return updateResults(buttonClicked);}
+    lastActionOperator = true;}
 
 function calculateResults() {
 
@@ -94,44 +91,42 @@ function addToHistory() {
     newHistoryItem.innerHTML = `${previousNumber.innerHTML} ${mathSign.innerHTML} ${currentNumber.innerHTML} = ${result}`
     newHistoryItem.classList.add('history-item');
     calculatorHistory.appendChild(newHistoryItem);
-    lastHistory.push(newHistoryItem.innerHTML);
-    previousResult = currentResult;}
+    resultsHistory.push(currentResult);}
 
-function clearHistory(event) {const buttonClicked = event.target.textContent;
-
+function clearHistory() {
+    
     calculatorHistory.textContent = '';
     if(calculatorHistory.textContent === '') {
         historyBtn.classList.remove('active');
         undoHistoryBtn.classList.remove('active');}}
 
-function undo(event) {const buttonClicked = event.target.textContent;
+function undo() {
 
-    if(lastHistory.length > 0 && buttonClicked) {calculatorHistory.removeChild(calculatorHistory.lastChild);}
-    if(lastHistory.length === 0) {
-        undoHistoryBtn.classList.remove('active');
-        historyBtn.classList.remove('active');}
-    if(previousResult !== '') {
+    if(resultsHistory.length > 0) {
+        const previousResult = resultsHistory.pop();
+        calculatorHistory.removeChild(calculatorHistory.lastChild);
         currentResult = previousResult;
-        currentNumber.innerHTML = currentResult;
-        updateResults(buttonClicked);}}
-
-function updateResults(buttonClicked) {
-    if(buttonClicked) {return previousResult;}
-    else {return result}}
+        currentNumber.innerHTML = currentResult;}
+    if(resultsHistory.length === 0){
+        undoHistoryBtn.classList.remove('active');
+        historyBtn.classList.remove('active');}}
 
 function clearScreen() {
+
     result = '';
-    previousResult = '';
     currentResult = '';
     currentNumber.innerHTML = '0';
     previousNumber.innerHTML = '';
     mathSign.innerHTML = '';}
 
 function delateNumber() {
+    
     currentNumber.innerHTML = currentNumber.innerHTML.slice(0, -1);
     lastActionOperator = false;}
 
-function addMinus(event) {const buttonClicked = event.target.textContent;
+function addMinus(event) {
+    
+    const buttonClicked = event.target.textContent;
 
     if(currentNumber.innerHTML === '' && buttonClicked === '+/-') {
     currentNumber.innerHTML = '-';
