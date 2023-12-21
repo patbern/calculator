@@ -1,6 +1,6 @@
 *Kalkulator* jest prostą aplikacją z interfejsem graficznym do wykonywania podstawowych obliczeń.
 
-Program można uruchomić poprzez link: 
+Program można uruchomić poprzez link: https://patbern.github.io/kalkulator/
 lub poprzez pobranie repozytorium lokalnie na swój komputer i uruchomienie pliku index.html
 
 Użyte technologie:
