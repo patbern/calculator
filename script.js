@@ -68,7 +68,9 @@ function calculateResults() {
         case '÷':
             if(a === 0 || b === 0){
                 alert("Invalid operation: division by 0.\nChoose another number :)");
-                clearScreen(true);
+                currentNumber.innerHTML = currentResult;
+                previousNumber.innerHTML = '';
+                mathSign.innerHTML = '';
                 return;}
             else{
                 result = b / a;
@@ -117,18 +119,13 @@ function updateResults(buttonClicked) {
     if(buttonClicked) {return previousResult;}
     else {return result}}
 
-function clearScreen(divisionByZero) {
-    if(divisionByZero) {
-        currentNumber.innerHTML = currentResult;
-        previousNumber.innerHTML = '';
-        mathSign.innerHTML = '';}
-    else {
-        result = '';
-        previousResult = '';
-        currentResult = '';
-        currentNumber.innerHTML = '0';
-        previousNumber.innerHTML = '';
-        mathSign.innerHTML = '';}}
+function clearScreen() {
+    result = '';
+    previousResult = '';
+    currentResult = '';
+    currentNumber.innerHTML = '0';
+    previousNumber.innerHTML = '';
+    mathSign.innerHTML = '';}
 
 function delateNumber() {
     currentNumber.innerHTML = currentNumber.innerHTML.slice(0, -1);
